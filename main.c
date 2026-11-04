@@ -71,14 +71,28 @@ void add_record() {
 		printf("Enter customer phone number: \n");
 		scanf("%s", customers[numcustomers].phonenumber);
 		printf("Enter customer usage:\n");
-		scanf("%f", &customer[numcustomers].planusage);
+		scanf("%f", &customers[numcustomers].planusage);
 
 		customers[numcustomers].bill = customers[numcustomers].planusage * 0.1;
 		numcustomers++;
 
 		printf("Successfully added customer record.\n");
-
-	else printf("You have hit the customer records limit.");
-
 	}
+	else printf("You have hit the customer records limit.");
+}
+
+void view_records() {
+	for (int i = 0; i < numcustomers; i++) {
+		printf("Customer Name: %s\n ", customers[i].customername);
+		printf("Customer phone number: %s\n ", customers[i].phonenumber);
+		printf("Customer Usage: %.2f\n", customers[i].planusage);
+		printf("Customer Bill: %.2f\n", customers[i].bill);
+		printf("-----------------------\n");
+	}
+
+	printf("Records successfully listed.");
+}
+
+void modify_record() {
+
 }
