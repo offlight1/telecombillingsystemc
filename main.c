@@ -20,6 +20,7 @@ struct Customer customers[MAXRECORDS];
 void add_record();
 void view_records();
 void modify_record();
+void record_editor();
 void view_payment();
 void delete_record();
 
@@ -94,5 +95,39 @@ void view_records() {
 }
 
 void modify_record() {
+	char input_name[CUSTOMERNAMELEN];
+	int user_found = 0;
 
+	printf("What record would you like to modify? Enter Customer Name:\n");
+	scanf("%s", input_name);
+
+	for (int index = 0; index < numcustomers; index++) {
+		if (strcmp(input_name, customers[index].customername) == 0) {
+			printf("Record found!");
+			user_found = 1;
+			break;
+		}
+	}
+
+	if (user_found == 0) {
+		printf("Record was not found.\n");
+	}
+}
+
+void record_editor() {
+	int editor_choice;
+	printf("What would you like to modify in this record? 1. Customer name 2. Phone number\n");
+	scanf("%d", &editor_choice);
+
+	if (editor_choice == 1) {
+		char new_name[CUSTOMERNAMELEN];
+		printf("Enter new customer name:\n");
+		scanf("%s", new_name);
+	}
+	else if (editor_choice == 2) {
+		char new_phonenumber[PHONENUMBERLEN];
+		printf("Enter new phone number:\n");
+		scanf("%s", new_phonenumber);
+	}
+	else printf("Invalid Choice.\n");
 }
