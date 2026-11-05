@@ -20,7 +20,7 @@ struct Customer customers[MAXRECORDS];
 void add_record();
 void view_records();
 void modify_record();
-void record_editor();
+void record_editor(int index);
 void view_payment();
 void delete_record();
 
@@ -28,35 +28,36 @@ char user_choice;
 int numcustomers = 0;
 
 int main() {
-	printf("What would you like to do? 1. add a record 2. view a record 3. modify a record 4. view a payment 5. delete a record 6. exit \n");
-	scanf("%c", &user_choice);
 
-	switch (user_choice) {
-	case '1':
-		add_record();
-		break;
+	while (1) {
+		printf("What would you like to do? 1. add a record 2. view a record 3. modify a record 4. view a payment 5. delete a record 6. exit \n");
+		scanf(" %c", &user_choice);
 
-	case '2':
-		view_records();
-		break;
+		switch (user_choice) {
+			case '1':
+				add_record();
+				break;
 
-	case '3':
-		modify_record();
-		break;
+			case '2':
+				view_records();
+				break;
 
-	case '4':
-		view_payment();
-		break;
+			case '3':
+				modify_record();
+				break;
 
-	case '5':
-		delete_record();
-		break;
+			case '4':
+				view_payment();
+				break;
 
-	case '6':
-		return 0;
+			case '5':
+				delete_record();
+				break;
+
+			case '6':
+				return 0;
+		}
 	}
-
-	return 0;
 }
 
 void add_record() {
@@ -152,4 +153,30 @@ void view_payment(){
 	if (user_found == 0)
 		printf("User not found.\n");
 
-} 
+}
+
+void delete_record() {
+	char user_number[PHONENUMBERLEN];
+	int user_found = 0;
+
+	printf("Enter the phone number of the record you wish to delete:\n");
+	scanf("%s", user_number);
+
+	for (int i = 0; i < numcustomers; i++) {
+		if (strcmp(user_number, customers[i].phonenumber) == 0) {
+			user_found = 1;
+
+			for (int j = i; j < numcustomers - 1; j++) {
+				customers[j] = customers[j + 1];
+			}
+
+			numcustomers--;
+
+			printf("Record successfully deleted.\n");
+			break;
+		}
+	}
+		if (user_found == 0)
+			printf("User not found.\n");
+
+}
