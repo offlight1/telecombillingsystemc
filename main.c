@@ -89,14 +89,14 @@ void view_records() {
 }
 
 void modify_record() {
-	char input_name[CUSTOMERNAMELEN];
+	char user_number[PHONENUMBERLEN];
 	int user_found = 0;
 
-	printf("What record would you like to modify? Enter Customer Name:\n");
-	scanf("%s", input_name);
+	printf("What record would you like to modify? Enter Customer phone number:\n");
+	scanf("%s", user_number);
 
 	for (int i = 0; i < numcustomers; i++) {
-		if (strcmp(input_name, customers[i].customername) == 0) {
+		if (strcmp(user_number, customers[i].phonenumber) == 0) {
 			printf("Record found!");
 			user_found = 1;
 			record_editor(i);
@@ -104,9 +104,9 @@ void modify_record() {
 		}
 	}
 
-	if (user_found == 0) {
+	if (user_found == 0)
 		printf("Record was not found.\n");
-	}
+
 }
 
 void record_editor(int index) {
@@ -120,8 +120,7 @@ void record_editor(int index) {
 		printf("Enter new customer name:\n");
 		scanf("%s", new_name);
 
-		customers[index].customername = new_name;
-
+		strcpy(customers[index].customername, new_name);
 	}
 	else if (editor_choice == 2) {
 		char new_phonenumber[PHONENUMBERLEN];
@@ -129,7 +128,28 @@ void record_editor(int index) {
 		printf("Enter new phone number:\n");
 		scanf("%s", new_phonenumber);
 
-		customers[index].phonenumber = new_phonenumber;
+		strcpy(customers[index].phonenumber, new_phonenumber);
 	}
 	else printf("Invalid Choice.\n");
 }
+
+void view_payment(){
+	char user_number[PHONENUMBERLEN];
+	int user_found = 0;
+
+	printf("Enter a phone number: ");
+	scanf("%s", user_number);
+
+	for (int i = 0; i < numcustomers; i++){
+		if (strcmp(user_number, customers[i].phonenumber) == 0){
+			printf("Total Usage: %f\n", customers[i].planusage);
+			printf("Bill: %f\n", customers[i].bill);
+			user_found = 1;
+			break;
+		}
+	}
+
+	if (user_found == 0)
+		printf("User not found.\n");
+
+} 
