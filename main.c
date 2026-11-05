@@ -28,13 +28,7 @@ char user_choice;
 int numcustomers = 0;
 
 int main() {
-	printf("What would you like to do? 
-		1. add a record 
-		2. view a record 
-		3. modify a record 
-		4. view a payment 
-		5. delete a record 
-		6. exit \n");
+	printf("What would you like to do? 1. add a record 2. view a record 3. modify a record 4. view a payment 5. delete a record 6. exit \n");
 	scanf("%c", &user_choice);
 
 	switch (user_choice) {
@@ -101,10 +95,11 @@ void modify_record() {
 	printf("What record would you like to modify? Enter Customer Name:\n");
 	scanf("%s", input_name);
 
-	for (int index = 0; index < numcustomers; index++) {
-		if (strcmp(input_name, customers[index].customername) == 0) {
+	for (int i = 0; i < numcustomers; i++) {
+		if (strcmp(input_name, customers[i].customername) == 0) {
 			printf("Record found!");
 			user_found = 1;
+			record_editor(i);
 			break;
 		}
 	}
@@ -114,20 +109,27 @@ void modify_record() {
 	}
 }
 
-void record_editor() {
+void record_editor(int index) {
 	int editor_choice;
 	printf("What would you like to modify in this record? 1. Customer name 2. Phone number\n");
 	scanf("%d", &editor_choice);
 
 	if (editor_choice == 1) {
 		char new_name[CUSTOMERNAMELEN];
+
 		printf("Enter new customer name:\n");
 		scanf("%s", new_name);
+
+		customers[index].customername = new_name;
+
 	}
 	else if (editor_choice == 2) {
 		char new_phonenumber[PHONENUMBERLEN];
+
 		printf("Enter new phone number:\n");
 		scanf("%s", new_phonenumber);
+
+		customers[index].phonenumber = new_phonenumber;
 	}
 	else printf("Invalid Choice.\n");
 }
