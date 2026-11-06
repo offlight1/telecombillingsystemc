@@ -63,11 +63,11 @@ int main() {
 void add_record() {
 	if (numcustomers < MAXRECORDS) {
 		printf("Enter Customer Name:\n ");
-		scanf("%s", customers[numcustomers].customername);
+		scanf(" %[^\n]", customers[numcustomers].customername);
 		printf("Enter customer phone number: \n");
-		scanf("%s", customers[numcustomers].phonenumber);
+		scanf(" %[^\n]", customers[numcustomers].phonenumber);
 		printf("Enter customer usage:\n");
-		scanf("%f", &customers[numcustomers].planusage);
+		scanf(" %f", &customers[numcustomers].planusage);
 
 		customers[numcustomers].bill = customers[numcustomers].planusage * 0.1;
 		numcustomers++;
@@ -94,7 +94,7 @@ void modify_record() {
 	int user_found = 0;
 
 	printf("What record would you like to modify? Enter Customer phone number:\n");
-	scanf("%s", user_number);
+	scanf(" %[^\n]", user_number);
 
 	for (int i = 0; i < numcustomers; i++) {
 		if (strcmp(user_number, customers[i].phonenumber) == 0) {
@@ -119,7 +119,7 @@ void record_editor(int index) {
 		char new_name[CUSTOMERNAMELEN];
 
 		printf("Enter new customer name:\n");
-		scanf("%s", new_name);
+		scanf(" %[^\n]", new_name);
 
 		strcpy(customers[index].customername, new_name);
 	}
@@ -127,7 +127,7 @@ void record_editor(int index) {
 		char new_phonenumber[PHONENUMBERLEN];
 
 		printf("Enter new phone number:\n");
-		scanf("%s", new_phonenumber);
+		scanf(" %[^\n]", new_phonenumber);
 
 		strcpy(customers[index].phonenumber, new_phonenumber);
 	}
@@ -139,7 +139,7 @@ void view_payment(){
 	int user_found = 0;
 
 	printf("Enter a phone number: ");
-	scanf("%s", user_number);
+	scanf(" %[^\n]", user_number);
 
 	for (int i = 0; i < numcustomers; i++){
 		if (strcmp(user_number, customers[i].phonenumber) == 0){
@@ -160,7 +160,7 @@ void delete_record() {
 	int user_found = 0;
 
 	printf("Enter the phone number of the record you wish to delete:\n");
-	scanf("%s", user_number);
+	scanf(" %[^\n]", user_number);
 
 	for (int i = 0; i < numcustomers; i++) {
 		if (strcmp(user_number, customers[i].phonenumber) == 0) {
